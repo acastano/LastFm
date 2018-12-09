@@ -1,0 +1,14 @@
+import XCTest
+
+final class NavigatorTests: XCTestCase {
+
+    func testExample() {
+        let controller = UINavigationController()
+        let navigator = Navigator(navigationController: controller, repository: AlbumRepositoryFakeImpl())
+
+        let album = AlbumViewModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
+        navigator.toAlbumDetails(album)
+
+        XCTAssert(controller.viewControllers.first is AlbumInfoViewController)
+    }
+}

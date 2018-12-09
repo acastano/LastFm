@@ -1,0 +1,11 @@
+framework module ImageCache {
+  umbrella header "ImageCache.h"
+
+  export *
+  module * { export * }
+}
+
+module ImageCache.Swift {
+    header "ImageCache-Swift.h"
+    requires objc
+}

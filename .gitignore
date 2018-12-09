@@ -1,0 +1,10 @@
+LastFm.xcodeproj/project.xcworkspace/xcuserdata
+LastFm.xcodeproj/xcuserdata
+
+#Carthage
+Carthage/Checkouts
+Carthage/Build/Mac
+Carthage/Build/tvOS
+Carthage/Build/watchOS
+*.version
+*.bcsymbolmap

@@ -30,7 +30,7 @@ final class AlbumRepositoryImplTests: XCTestCase {
     }
 
     func testDetailSuccess() {
-        let album = AlbumViewModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
+        let album = AlbumModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
 
         let repository = AlbumRepositoryImpl(dataTask: DataTaskSuccess(fileName: "info.json"))
 
@@ -45,7 +45,7 @@ final class AlbumRepositoryImplTests: XCTestCase {
     }
 
     func testDetailFailure() {
-        let album = AlbumViewModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
+        let album = AlbumModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
 
         let repository = AlbumRepositoryImpl(dataTask: DataTaskFailure())
 

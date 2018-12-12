@@ -1,6 +1,6 @@
 import Foundation
 
-struct AlbumViewModel {
+struct AlbumModel {
     let artistText: String
     let albumText: String
     let image: String?

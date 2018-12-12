@@ -3,10 +3,9 @@ import RxSwift
 import ImageCache
 
 final class AlbumInfoViewController: UIViewController {
-    static func controller(repository: AlbumRepository?, album: AlbumViewModel) -> AlbumInfoViewController? {
+    static func controller(repository: AlbumRepository, album: AlbumModel) -> AlbumInfoViewController? {
         let controller = UIStoryboard.instantiateViewController(className(), anyClass: self) as? AlbumInfoViewController
-        controller?.album = album
-        controller?.repository = repository
+        controller?.viewModel = AlbumInfoViewModel(repository: repository, albumModel: album)
         return controller
     }
 
@@ -15,8 +14,7 @@ final class AlbumInfoViewController: UIViewController {
 
     private var topHeight = CGFloat(0.0)
     private var navigationHeight = CGFloat(0.0)
-    private var album: AlbumViewModel?
-    private var repository: AlbumRepository?
+    private var viewModel: AlbumInfoViewModel?
 
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
@@ -28,8 +26,7 @@ final class AlbumInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let album = album else { return }
-        setup(album)
+        setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,54 +34,29 @@ final class AlbumInfoViewController: UIViewController {
         topHeight = topViewHeightConstraint.constant
     }
 
-    private func setup(_ album: AlbumViewModel) {
-        setupViews(album)
-        setupObservables(album)
+    private func setup() {
+        setupViews()
+        setupObservables()
     }
 
-    private func setupObservables(_ album: AlbumViewModel) {
-        let albumInfoObservable = albumInfo(album)
-
-        albumInfoObservable?.map { $0.album.tracks.track.map(TrackViewModel.init) }
-            .bind(to: collectionView.rx.items(cellIdentifier: cellIdentifier)) {
-                (index, track: TrackViewModel, cell) in
-                let cell = cell as? AlbumTrackViewCell
-                cell?.configure(track)
+    private func setupObservables() {
+        viewModel?.items.bind(to: collectionView.rx.items(cellIdentifier: cellIdentifier)) {
+            (index, track: TrackModel, cell) in
+            let cell = cell as? AlbumTrackViewCell
+            cell?.configure(track)
             }
             .disposed(by: disposeBag)
 
-        albumInfoObservable?.observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] albumInfo in
-                if let strongSelf = self {
-                    strongSelf.configure(albumInfo)
-                }
-                }, onError: { [weak self] _ in
-                    if let strongSelf = self {
-                        strongSelf.configureError()
-                    }
-            }).disposed(by: disposeBag)
+        viewModel?.loadingLabelText.bind(to: loadingLabel.rx.text).disposed(by: disposeBag)
+        viewModel?.loadingHidden.bind(to: loadingLabel.rx.isHidden).disposed(by: disposeBag)
     }
 
-    private func setupViews(_ album: AlbumViewModel) {
-        title = album.albumText
-        artistLabel.text = album.artistText
+    private func setupViews() {
+        title = viewModel?.albumModel.albumText
+        artistLabel.text = viewModel?.albumModel.artistText
 
         albumImageView.layer.cornerRadius = 10
-        loadingLabel.text = NSLocalizedString("LoadingText", comment: "")
-        albumImageView.loadImage(with: album.image, placeholder: album.placeholderImage)
-    }
-
-    private func configure(_ albumInfo: AlbumInfo) {
-        loadingLabel.isHidden = albumInfo.album.tracks.track.count > 0
-    }
-
-    private func configureError() {
-        loadingLabel.isHidden = false
-        loadingLabel.text = NSLocalizedString("NoContentText", comment: "")
-    }
-
-    private func albumInfo(_ album: AlbumViewModel) -> Observable<AlbumInfo>? {
-        return repository?.info(album)
+        albumImageView.loadImage(with: viewModel?.albumModel.image, placeholder: viewModel?.albumModel.placeholderImage)
     }
 }
 
@@ -117,4 +89,3 @@ extension AlbumInfoViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: 60)
     }
 }
-

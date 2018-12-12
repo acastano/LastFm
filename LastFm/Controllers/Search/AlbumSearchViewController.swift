@@ -5,8 +5,8 @@ final class AlbumSearchViewController: UIViewController {
     static func controller(repository: AlbumRepository, navigatior: Navigator, keyboardManager: KeyboardManager = KeyboardManagerImpl()) -> AlbumSearchViewController? {
         let controller = UIStoryboard.instantiateViewController(className(), anyClass: self) as? AlbumSearchViewController
         controller?.navigator = navigatior
-        controller?.repository = repository
         controller?.keyboardManager = keyboardManager
+        controller?.viewModel = AlbumSearchViewModel(repository: repository)
         return controller
     }
 
@@ -14,25 +14,25 @@ final class AlbumSearchViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private let defaultCellHeight = CGFloat(90)
 
-    let searchText = Variable<String>("")
+    var viewModel: AlbumSearchViewModel?
 
     private var navigator: Navigator?
-    private var repository: AlbumRepository?
     private var keyboardManager: KeyboardManager?
 
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setup()
     }
 
     private func setup() {
         title = NSLocalizedString("AlbumSearchViewControllerTitle", comment: "")
-        contentLabel.text = NSLocalizedString("AlbumSearchViewControllerPlaceholder", comment: "")
+        loadingLabel.text = NSLocalizedString("LoadingText", comment: "")
+        contentLabel.text = NSLocalizedString("NoContentText", comment: "")
         searchBar.placeholder = NSLocalizedString("AlbumSearchViewControllerPlaceholder", comment: "")
 
         tableView.estimatedRowHeight = defaultCellHeight
@@ -44,6 +44,7 @@ final class AlbumSearchViewController: UIViewController {
     }
 
     func setupObservables() {
+        setupLabels()
         setupSearchBar()
         setupTableView()
     }
@@ -52,59 +53,32 @@ final class AlbumSearchViewController: UIViewController {
         searchBar.rx.text.orEmpty
             .throttle(0.3, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] query in
-                self?.searchText.value = query
-                self?.configureUsingQuery(query)
+                self?.viewModel?.updateQuery(query)
             }).disposed(by: disposeBag)
     }
 
-    private func configureUsingQuery(_ query: String) {
-        if query.isEmpty {
-            tableView.isHidden = true
-            contentLabel.isHidden = false
-            contentLabel.text = NSLocalizedString("AlbumSearchViewControllerPlaceholder", comment: "")
-        } else {
-            contentLabel.text = NSLocalizedString("LoadingText", comment: "")
-        }
-    }
-
-    private func configureNoContent(albums: [AlbumViewModel]) {
-        tableView.isHidden = albums.count == 0
-        contentLabel.isHidden = albums.count > 0
-        contentLabel.text = NSLocalizedString("NoContentText", comment: "")
+    private func setupLabels() {
+        viewModel?.loadingHidden.bind(to: loadingLabel.rx.isHidden).disposed(by: disposeBag)
+        viewModel?.noContentHidden.bind(to: contentLabel.rx.isHidden).disposed(by: disposeBag)
     }
 
     private func setupTableView() {
-        let results = searchText
-            .asObservable()
-            .distinctUntilChanged()
-            .flatMapLatest { [weak self] query -> Observable<[AlbumViewModel]> in
-                if let strongSelf = self, !query.isEmpty {
-                    return strongSelf.searchAlbums(query)
-                }
-                return Observable.empty()
-        }
+        viewModel?.tableHidden.bind(to: tableView.rx.isHidden).disposed(by: disposeBag)
 
-        results.observeOn(MainScheduler.instance).map { [weak self] albums -> [AlbumViewModel] in
-            self?.configureNoContent(albums: albums)
-            return albums
-        }.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) {
-            (index, album: AlbumViewModel, cell) in
+        viewModel?.items.bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) {
+            (index, album: AlbumModel, cell) in
             let cell = cell as? AlbumViewCell
             cell?.configure(album)
             }
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
 
         tableView.rx
-            .modelSelected(AlbumViewModel.self)
+            .modelSelected(AlbumModel.self)
             .subscribe(onNext:  { [weak self] album in
                 if let strongSelf = self {
                     strongSelf.navigator?.toAlbumDetails(album)
                 }
             })
             .disposed(by: disposeBag)
-    }
-
-    private func searchAlbums(_ query: String) -> Observable<[AlbumViewModel]> {
-        return repository?.search(query).catchErrorJustReturn([]) ?? Observable.just([])
     }
 }

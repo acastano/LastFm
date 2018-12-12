@@ -8,16 +8,16 @@ struct AlbumRepositoryImpl: AlbumRepository {
         self.dataTask = dataTask
     }
 
-    func search(_ query: String) -> Observable<[AlbumViewModel]> {
+    func search(_ query: String) -> Observable<[AlbumModel]> {
         let resource = Resource(parameters: "method=album.search&album=\(query)", method: .get)
 
         let observable: Observable<Search> = dataTask.loadData(resource)
         return observable.map {
-            $0.results.albummatches.album.map(AlbumViewModel.init)
+            $0.results.albummatches.album.map(AlbumModel.init)
         }
     }
 
-    func info(_ album: AlbumViewModel) -> Observable<AlbumInfo> {
+    func info(_ album: AlbumModel) -> Observable<AlbumInfo> {
         let resource = Resource(parameters: "method=album.getinfo&artist=\(album.artistText)&album=\(album.albumText)", method: .get)
 
         let observable: Observable<AlbumInfo> = dataTask.loadData(resource)

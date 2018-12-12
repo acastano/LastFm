@@ -9,7 +9,7 @@ final class Navigator {
         self.navigationController = navigationController
     }
 
-    func toAlbumDetails(_ album: AlbumViewModel) {
+    func toAlbumDetails(_ album: AlbumModel) {
         guard  let navigationController = navigationController,
             let controller = AlbumInfoViewController.controller(repository: repository, album: album) else { return }
         navigationController.pushViewController(controller, animated: true)

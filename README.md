@@ -9,13 +9,11 @@ Xcode 10, iOS 12.1
 
 * Open App.xcodeproj. When open press run using a simulator or device.
 
-* Find OAuthAttributes and add the keys and secrets, remember to fix the tests
-
 * Run the test using CMD + U
 
 * The project has two view controller called AlbumSearchtListViewController that shows a list of albums for a query. And the AlbumInfoViewController that shows the albums details including the tracks
 
-* Unit tests are done with XCTest. The test covearage is 96.3%.
+* Unit tests are done with XCTest. The test covearage is 96.5%.
 
 * The only third party libraries are RxSwift and RxCocoa and the code is written using the below coding standards. Also ImageCache that was developed by image some time ago.
 

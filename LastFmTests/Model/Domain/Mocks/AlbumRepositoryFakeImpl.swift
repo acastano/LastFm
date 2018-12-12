@@ -2,11 +2,11 @@ import RxSwift
 import Foundation
 
 struct AlbumRepositoryFakeImpl: AlbumRepository {
-    func info(_ album: AlbumViewModel) -> Observable<AlbumInfo> {
+    func info(_ album: AlbumModel) -> Observable<AlbumInfo> {
         return Observable.empty()
     }
 
-    func search(_ query: String) -> Observable<[AlbumViewModel]> {
+    func search(_ query: String) -> Observable<[AlbumModel]> {
         return Observable.just([])
     }
 }

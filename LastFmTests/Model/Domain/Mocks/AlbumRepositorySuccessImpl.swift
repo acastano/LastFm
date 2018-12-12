@@ -2,7 +2,7 @@ import RxSwift
 import Foundation
 
 final class AlbumRepositorySuccessImpl: NSObject, AlbumRepository {
-    func info(_ album: AlbumViewModel) -> Observable<AlbumInfo> {
+    func info(_ album: AlbumModel) -> Observable<AlbumInfo> {
 
         var albumInfo: AlbumInfo?
         if let data = self.dataFromJSONFile("info.json", bundle: Bundle(for: type(of: self))) {
@@ -16,8 +16,8 @@ final class AlbumRepositorySuccessImpl: NSObject, AlbumRepository {
         }
     }
 
-    func search(_ query: String) -> Observable<[AlbumViewModel]> {
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: "image", placeholderImage: "placeholderImage")
+    func search(_ query: String) -> Observable<[AlbumModel]> {
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: "image", placeholderImage: "placeholderImage")
 
         return Observable.just([album])
     }

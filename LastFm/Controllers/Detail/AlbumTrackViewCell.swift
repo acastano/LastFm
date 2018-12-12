@@ -5,8 +5,8 @@ final class AlbumTrackViewCell: UICollectionViewCell {
     @IBOutlet weak var trackLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
 
-    func configure(_ viewModel: TrackViewModel) {
-        trackLabel.text = viewModel.nameText
-        durationLabel.text = viewModel.durationText
+    func configure(_ model: TrackModel) {
+        trackLabel.text = model.nameText
+        durationLabel.text = model.durationText
     }
 }

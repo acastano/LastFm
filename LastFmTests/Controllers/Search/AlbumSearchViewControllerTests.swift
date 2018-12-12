@@ -25,7 +25,7 @@ final class AlbumSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(controller?.tableView.isHidden == true)
         XCTAssertTrue(controller?.contentLabel.isHidden == false)
         XCTAssertTrue(controller?.title == "AlbumSearchViewControllerTitle")
-        XCTAssertTrue(controller?.contentLabel.text == "AlbumSearchViewControllerPlaceholder")
+        XCTAssertTrue(controller?.contentLabel.text == "NoContentText")
         XCTAssertTrue(controller?.searchBar.placeholder == "AlbumSearchViewControllerPlaceholder")
     }
 
@@ -35,7 +35,7 @@ final class AlbumSearchViewControllerTests: XCTestCase {
 
         controller?.view.layoutIfNeeded()
 
-        controller?.searchText.value = "query"
+        controller?.viewModel?.updateQuery("query")
 
         let cell = controller?.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
 
@@ -56,7 +56,7 @@ final class AlbumSearchViewControllerTests: XCTestCase {
 
         controller?.viewDidLoad()
 
-        XCTAssertTrue(controller?.contentLabel.text == "LoadingText")
+        XCTAssertTrue(controller?.loadingLabel.text == "LoadingText")
     }
 
     func testNoContent() {

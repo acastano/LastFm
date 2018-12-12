@@ -12,9 +12,9 @@ final class AlbumViewCell: UITableViewCell {
         albumImageView.layer.cornerRadius = 10
     }
 
-    func configure(_ viewModel: AlbumViewModel) {
-        albumLabel.text = viewModel.albumText
-        artistLabel.text = viewModel.artistText
-        albumImageView.loadImage(with: viewModel.image, placeholder: viewModel.placeholderImage)
+    func configure(_ model: AlbumModel) {
+        albumLabel.text = model.albumText
+        artistLabel.text = model.artistText
+        albumImageView.loadImage(with: model.image, placeholder: model.placeholderImage)
     }
 }

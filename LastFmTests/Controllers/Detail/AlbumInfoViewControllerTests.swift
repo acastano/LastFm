@@ -8,7 +8,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testOutletsAreAssigned() {
         let repository = AlbumRepositoryFakeImpl()
-        let album = AlbumViewModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
+        let album = AlbumModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -24,7 +24,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testSetup() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -35,7 +35,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTopHeightOnScrollOffsetZero() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -53,7 +53,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTopHeightOnScrollOffsetOneHundred() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -72,7 +72,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTopHeightOnScrollOffsetBiggerThanTopHeight() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -91,7 +91,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTrackLabelsAreSet() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
 
@@ -102,12 +102,12 @@ final class AlbumInfoViewControllerTests: XCTestCase {
         let trackCell = cell as? AlbumTrackViewCell
 
         XCTAssertTrue(trackCell?.trackLabel.text == "Intro / El Nay A\'atini Nay")
-        XCTAssertTrue(trackCell?.durationLabel.text == "TrackViewModelDuration 2:02")
+        XCTAssertTrue(trackCell?.durationLabel.text == "TrackModelDuration 2:02")
     }
 
     func testLoadingLabelIsSet() {
         let repository = AlbumRepositoryFakeImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
 
@@ -120,7 +120,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testFailureLabelIsSet() {
         let repository = AlbumRepositoryFailureImpl()
-        let album = AlbumViewModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
 

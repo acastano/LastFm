@@ -6,7 +6,7 @@ final class NavigatorTests: XCTestCase {
         let controller = UINavigationController()
         let navigator = Navigator(navigationController: controller, repository: AlbumRepositoryFakeImpl())
 
-        let album = AlbumModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
+        let album = AlbumModel(id: "", artistText: "", albumText: "", image: nil, placeholderImage:"")
         navigator.toAlbumDetails(album)
 
         XCTAssert(controller.viewControllers.first is AlbumInfoViewController)

@@ -8,7 +8,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testOutletsAreAssigned() {
         let repository = AlbumRepositoryFakeImpl()
-        let album = AlbumModel(artistText: "", albumText: "", image: nil, placeholderImage:"")
+        let album = AlbumModel(id: "", artistText: "", albumText: "", image: nil, placeholderImage:"")
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -24,7 +24,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testSetup() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -35,7 +35,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTopHeightOnScrollOffsetZero() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -45,7 +45,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
         if let scrollView = controller?.collectionView {
             controller?.scrollViewDidScroll(scrollView)
             XCTAssertTrue(controller?.topViewTopConstraint.constant == 0)
-            XCTAssertTrue(controller?.topViewHeightConstraint.constant == 233.5)
+            XCTAssertTrue(controller?.topViewHeightConstraint.constant == 300)
         } else {
             XCTFail()
         }
@@ -53,7 +53,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTopHeightOnScrollOffsetOneHundred() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -64,7 +64,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
             scrollView.contentOffset = CGPoint(x: 0, y: 100)
             controller?.scrollViewDidScroll(scrollView)
             XCTAssertTrue(controller?.topViewTopConstraint.constant == -100)
-            XCTAssertTrue(controller?.topViewHeightConstraint.constant == 233.5)
+            XCTAssertTrue(controller?.topViewHeightConstraint.constant == 300)
         } else {
             XCTFail()
         }
@@ -72,7 +72,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTopHeightOnScrollOffsetBiggerThanTopHeight() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
         controller?.view.layoutIfNeeded()
@@ -82,8 +82,8 @@ final class AlbumInfoViewControllerTests: XCTestCase {
         if let scrollView = controller?.collectionView {
             scrollView.contentOffset = CGPoint(x: 0, y: 1000)
             controller?.scrollViewDidScroll(scrollView)
-            XCTAssertTrue(controller?.topViewTopConstraint.constant == -233.5)
-            XCTAssertTrue(controller?.topViewHeightConstraint.constant == 233.5)
+            XCTAssertTrue(controller?.topViewTopConstraint.constant == -300)
+            XCTAssertTrue(controller?.topViewHeightConstraint.constant == 300)
         } else {
             XCTFail()
         }
@@ -91,7 +91,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testTrackLabelsAreSet() {
         let repository = AlbumRepositorySuccessImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
 
@@ -107,7 +107,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testLoadingLabelIsSet() {
         let repository = AlbumRepositoryFakeImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
 
@@ -120,7 +120,7 @@ final class AlbumInfoViewControllerTests: XCTestCase {
 
     func testFailureLabelIsSet() {
         let repository = AlbumRepositoryFailureImpl()
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: nil, placeholderImage: nil)
 
         controller = AlbumInfoViewController.controller(repository: repository, album: album)
 

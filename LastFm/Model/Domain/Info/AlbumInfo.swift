@@ -3,6 +3,7 @@ struct AlbumInfo: Codable {
 }
 
 struct AlbumDetail: Codable {
+    let mbid: String
     let name: String
     let artist: String
     let tracks: Tracks

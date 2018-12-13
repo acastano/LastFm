@@ -1,0 +1,4 @@
+framework module WorldPayKit {
+  header "WorldPayKit-Swift.h"
+  requires objc
+}

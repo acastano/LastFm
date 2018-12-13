@@ -7,7 +7,8 @@ struct AlbumSearchViewModel {
     private let searchText = Variable<String>("")
     private let tableHiddenVariable = Variable<Bool>(false)
     private let loadingHiddenVariable = Variable<Bool>(true)
-    private let noContentHiddenVariable = Variable<Bool>(false)
+    private let contentHiddenVariable = Variable<Bool>(false)
+    private let contentTextVariable = Variable<String>(NSLocalizedString("AlbumSearchViewControllerPlaceholder", comment: ""))
 
     private let itemsVariable = Variable<[AlbumModel]>([])
 
@@ -20,8 +21,12 @@ struct AlbumSearchViewModel {
         return self.itemsVariable.asObservable()
     }
 
-    var noContentHidden: Observable<Bool> {
-        return self.noContentHiddenVariable.asObservable()
+    var contentHidden: Observable<Bool> {
+        return self.contentHiddenVariable.asObservable()
+    }
+
+    var contentText: Observable<String> {
+        return self.contentTextVariable.asObservable()
     }
 
     var loadingHidden: Observable<Bool> {
@@ -44,7 +49,8 @@ struct AlbumSearchViewModel {
                 let count = self.itemsVariable.value.count
                 self.tableHiddenVariable.value = count == 0
                 self.loadingHiddenVariable.value = count > 0 || query.count == 0
-                self.noContentHiddenVariable.value = count > 0 || !self.loadingHiddenVariable.value
+                self.contentHiddenVariable.value = count > 0 || !self.loadingHiddenVariable.value
+                self.contentTextVariable.value = query.isEmpty ? NSLocalizedString("AlbumSearchViewControllerPlaceholder", comment: "") : NSLocalizedString("NoContentText", comment: "")
                 return !query.isEmpty ? self.repository.search(query).catchErrorJustReturn([]) : Observable.just([])
         }.asObservable()
 
@@ -52,7 +58,7 @@ struct AlbumSearchViewModel {
             self.itemsVariable.value = items
             self.loadingHiddenVariable.value = true
             self.tableHiddenVariable.value = items.count == 0
-            self.noContentHiddenVariable.value = items.count > 0
+            self.contentHiddenVariable.value = items.count > 0
         }).disposed(by: disposeBag)
     }
 }

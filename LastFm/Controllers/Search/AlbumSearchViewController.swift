@@ -32,7 +32,6 @@ final class AlbumSearchViewController: UIViewController {
     private func setup() {
         title = NSLocalizedString("AlbumSearchViewControllerTitle", comment: "")
         loadingLabel.text = NSLocalizedString("LoadingText", comment: "")
-        contentLabel.text = NSLocalizedString("NoContentText", comment: "")
         searchBar.placeholder = NSLocalizedString("AlbumSearchViewControllerPlaceholder", comment: "")
 
         tableView.estimatedRowHeight = defaultCellHeight
@@ -58,8 +57,9 @@ final class AlbumSearchViewController: UIViewController {
     }
 
     private func setupLabels() {
+        viewModel?.contentText.bind(to: contentLabel.rx.text).disposed(by: disposeBag)
+        viewModel?.contentHidden.bind(to: contentLabel.rx.isHidden).disposed(by: disposeBag)
         viewModel?.loadingHidden.bind(to: loadingLabel.rx.isHidden).disposed(by: disposeBag)
-        viewModel?.noContentHidden.bind(to: contentLabel.rx.isHidden).disposed(by: disposeBag)
     }
 
     private func setupTableView() {

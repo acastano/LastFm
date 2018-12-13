@@ -13,7 +13,7 @@ Xcode 10, iOS 12.1
 
 * The project has two view controller called AlbumSearchtListViewController that shows a list of albums for a query. And the AlbumInfoViewController that shows the albums details including the tracks
 
-* Unit tests are done with XCTest. The test covearage is 96.5%.
+* Unit tests are done with XCTest. The test covearage is 96.6%.
 
 * The only third party libraries are RxSwift and RxCocoa and the code is written using the below coding standards. Also ImageCache that was developed by image some time ago.
 

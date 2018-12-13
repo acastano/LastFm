@@ -25,7 +25,7 @@ final class AlbumSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(controller?.tableView.isHidden == true)
         XCTAssertTrue(controller?.contentLabel.isHidden == false)
         XCTAssertTrue(controller?.title == "AlbumSearchViewControllerTitle")
-        XCTAssertTrue(controller?.contentLabel.text == "NoContentText")
+        XCTAssertTrue(controller?.contentLabel.text == "AlbumSearchViewControllerPlaceholder")
         XCTAssertTrue(controller?.searchBar.placeholder == "AlbumSearchViewControllerPlaceholder")
     }
 

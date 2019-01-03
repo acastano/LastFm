@@ -1,4 +1,5 @@
 import UIKit
+import PaymentKit
 
 final class Navigator {
     private let repository: AlbumRepository

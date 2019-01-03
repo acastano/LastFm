@@ -11,6 +11,7 @@ struct Albummatches: Codable {
 }
 
 struct Album: Codable {
+    let mbid: String
     let name, artist: String
     let image: [Image]
 }

@@ -17,7 +17,7 @@ final class AlbumRepositorySuccessImpl: NSObject, AlbumRepository {
     }
 
     func search(_ query: String) -> Observable<[AlbumModel]> {
-        let album = AlbumModel(artistText: "artistText", albumText: "albumText", image: "image", placeholderImage: "placeholderImage")
+        let album = AlbumModel(id: "", artistText: "artistText", albumText: "albumText", image: "image", placeholderImage: "placeholderImage")
 
         return Observable.just([album])
     }

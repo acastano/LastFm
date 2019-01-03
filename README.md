@@ -7,15 +7,15 @@ Xcode 10, iOS 12.1
 
 ## Instructions ##
 
-* Open App.xcodeproj. When open press run using a simulator or device.
+* Open LastFm.xcodeproj. When open press run using a simulator or device.
 
 * Run the test using CMD + U
 
-* The project has two view controller called AlbumSearchtListViewController that shows a list of albums for a query. And the AlbumInfoViewController that shows the albums details including the tracks
+* The project has two view controllers called AlbumSearchtListViewController that shows a list of albums for a query. And the AlbumInfoViewController that shows the albums details including the tracks
 
-* Unit tests are done with XCTest. The test covearage is 96.6%.
+* Unit tests are done with XCTest. The test covearage is 97.2%.
 
-* The only third party libraries are RxSwift and RxCocoa and the code is written using the below coding standards. Also ImageCache that was developed by image some time ago.
+* The only third party libraries are RxSwift and RxCocoa and the code is written using the below coding standards. Also ImageCache that was developed by me some time ago.
 
 ## Coding standards ##
 

@@ -1,2 +1,3 @@
 github "ReactiveX/RxSwift" "4.4.0"
 github "acastano/ImageCache" "1.0.0"
+github "acastano/PaymentKit" "1.0.0"

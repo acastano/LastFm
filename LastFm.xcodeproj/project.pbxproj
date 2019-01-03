@@ -90,10 +90,7 @@
 		41E42DD521BD870000D3D8E6 /* KeyboardManagerImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E42DD421BD870000D3D8E6 /* KeyboardManagerImplTests.swift */; };
 		41E42DD621BD876600D3D8E6 /* KeyboardManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FAC43621BD700600D54725 /* KeyboardManagerImpl.swift */; };
 		41E42DD821BD92B200D3D8E6 /* TrackModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E42DD721BD92B200D3D8E6 /* TrackModelTests.swift */; };
-		41EC2B6621C2E93C0042A767 /* WorldPayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EC2B6521C2E93C0042A767 /* WorldPayKit.framework */; };
 		41EC2B6721C2E98F0042A767 /* ImageCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4125467E21BD310400C775E1 /* ImageCache.framework */; };
-		41EC2B6821C2E9A90042A767 /* WorldPayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EC2B6521C2E93C0042A767 /* WorldPayKit.framework */; };
-		41EC2B6921C2E9A90042A767 /* WorldPayKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41EC2B6521C2E93C0042A767 /* WorldPayKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41EC2B6A21C2E9A90042A767 /* ImageCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4125467E21BD310400C775E1 /* ImageCache.framework */; };
 		41EC2B6B21C2E9A90042A767 /* ImageCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4125467E21BD310400C775E1 /* ImageCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41FAC43821BD703700D54725 /* KeyboardManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FAC43621BD700600D54725 /* KeyboardManagerImpl.swift */; };
@@ -116,7 +113,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				41EC2B6921C2E9A90042A767 /* WorldPayKit.framework in Embed Frameworks */,
 				4125465621BD21B400C775E1 /* RxSwift.framework in Embed Frameworks */,
 				4125465421BD21B400C775E1 /* RxCocoa.framework in Embed Frameworks */,
 				41EC2B6B21C2E9A90042A767 /* ImageCache.framework in Embed Frameworks */,
@@ -185,7 +181,6 @@
 		41E42DD221BD7D2F00D3D8E6 /* AlbumRepositoryEmptyImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryEmptyImpl.swift; sourceTree = "<group>"; };
 		41E42DD421BD870000D3D8E6 /* KeyboardManagerImplTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManagerImplTests.swift; sourceTree = "<group>"; };
 		41E42DD721BD92B200D3D8E6 /* TrackModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModelTests.swift; sourceTree = "<group>"; };
-		41EC2B6521C2E93C0042A767 /* WorldPayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WorldPayKit.framework; path = Carthage/Build/iOS/WorldPayKit.framework; sourceTree = SOURCE_ROOT; };
 		41FAC43621BD700600D54725 /* KeyboardManagerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardManagerImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,8 +192,6 @@
 				4125465521BD21B400C775E1 /* RxSwift.framework in Frameworks */,
 				41EC2B6721C2E98F0042A767 /* ImageCache.framework in Frameworks */,
 				4125465321BD21B400C775E1 /* RxCocoa.framework in Frameworks */,
-				41EC2B6821C2E9A90042A767 /* WorldPayKit.framework in Frameworks */,
-				41EC2B6621C2E93C0042A767 /* WorldPayKit.framework in Frameworks */,
 				4125465021BD219300C775E1 /* RxCocoa.framework in Frameworks */,
 				4125464F21BD219300C775E1 /* RxSwift.framework in Frameworks */,
 				41EC2B6A21C2E9A90042A767 /* ImageCache.framework in Frameworks */,
@@ -267,7 +260,7 @@
 		412545B421BB2E3500C775E1 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				41EC2B6421C2E9180042A767 /* WorldPay */,
+				41EC2B6421C2E9180042A767 /* PaymentKit */,
 				412545EB21BBC02F00C775E1 /* ImageCache */,
 				412545B521BB2E4900C775E1 /* RxSwift */,
 			);
@@ -587,12 +580,11 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		41EC2B6421C2E9180042A767 /* WorldPay */ = {
+		41EC2B6421C2E9180042A767 /* PaymentKit */ = {
 			isa = PBXGroup;
 			children = (
-				41EC2B6521C2E93C0042A767 /* WorldPayKit.framework */,
 			);
-			name = WorldPay;
+			name = PaymentKit;
 			sourceTree = "<group>";
 		};
 		41FAC43921BD728900D54725 /* UI */ = {

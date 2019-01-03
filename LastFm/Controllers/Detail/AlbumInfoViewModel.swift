@@ -1,6 +1,6 @@
 import RxSwift
 import Foundation
-import WorldPayKit
+import PaymentKit
 import UIKit
 
 struct AlbumInfoViewModel {
@@ -8,7 +8,7 @@ struct AlbumInfoViewModel {
 
     let albumModel: AlbumModel
 
-    private let wordPay: WorldPay
+    private let paymentKit: PaymentKit
     private let repository: AlbumRepository
     private let makePaymentSubject = PublishSubject<Bool>()
     private let cancelPaymentSubject = PublishSubject<Bool>()
@@ -19,8 +19,8 @@ struct AlbumInfoViewModel {
 
     private let itemsVariable = Variable<[TrackModel]>([])
 
-    init(repository: AlbumRepository, albumModel: AlbumModel, wordPay: WorldPay) {
-        self.wordPay = wordPay
+    init(repository: AlbumRepository, albumModel: AlbumModel, paymentKit: PaymentKit) {
+        self.paymentKit = paymentKit
         self.albumModel = albumModel
         self.repository = repository
         fetchItems()
@@ -59,7 +59,7 @@ struct AlbumInfoViewModel {
         loadingLabelTextVariable.value = NSLocalizedString("ProcessingPaymentText", comment: "")
 
         UIApplication.shared.beginIgnoringInteractionEvents()
-        self.wordPay.makePayment(productId, description: productDescription, value: value) { result in
+        paymentKit.makePayment(productId, description: productDescription, value: value) { result in
 
             self.makePaymentSubject.onNext(true)
             self.updatePaymentButtons()
@@ -71,12 +71,12 @@ struct AlbumInfoViewModel {
     }
 
     func cancelPayment() {
-        if let payment = wordPay.payment(albumModel.id) {
+        if let payment = paymentKit.payment(albumModel.id) {
             loadingHiddenVariable.value = false
             loadingLabelTextVariable.value = NSLocalizedString("CancellingPaymentText", comment: "")
 
             UIApplication.shared.beginIgnoringInteractionEvents()
-            wordPay.cancelPayment(payment.id) { result in
+            paymentKit.cancelPayment(payment.id) { result in
 
                 self.cancelPaymentSubject.onNext(true)
                 self.updatePaymentButtons()
@@ -102,7 +102,7 @@ struct AlbumInfoViewModel {
         itemsVariable.value = albumInfo.album.tracks.track.map(TrackModel.init)
         loadingHiddenVariable.value = count > 0
 
-        let purchased = wordPay.purchased(albumModel.id)
+        let purchased = paymentKit.purchased(albumModel.id)
         paymentHiddenVariable.value = albumInfo.album.mbid.isEmpty || count == 0 || purchased
         cancelPurchaseHiddenVariable.value = !purchased
         loadingLabelTextVariable.value = NSLocalizedString("NoContentText", comment: "")
@@ -116,7 +116,7 @@ struct AlbumInfoViewModel {
 
     private func updatePaymentButtons() {
         loadingHiddenVariable.value = true
-        let purchased = wordPay.purchased(albumModel.id)
+        let purchased = paymentKit.purchased(albumModel.id)
         paymentHiddenVariable.value = purchased
         cancelPurchaseHiddenVariable.value = !purchased
     }

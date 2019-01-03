@@ -1,16 +1,16 @@
 import XCTest
 import RxSwift
 import RxCocoa
-import WorldPayKit
+import PaymentKit
 
 final class AlbumInfoViewModelTests: XCTestCase {
     private let disposeBag = DisposeBag()
-    private let wordPay = WorldPay.sharedInstance
+    private let paymentKit = PaymentKit.sharedInstance
 
     func testMakePayment() {
         let album = AlbumModel(id: "1", artistText: "", albumText: "albumText", image: nil, placeholderImage:"")
 
-        let viewModel = AlbumInfoViewModel(repository: AlbumRepositorySuccessImpl(), albumModel: album, wordPay: WorldPay.sharedInstance)
+        let viewModel = AlbumInfoViewModel(repository: AlbumRepositorySuccessImpl(), albumModel: album, paymentKit: PaymentKit.sharedInstance)
 
         var loadingHidden = false
         viewModel.makePayment(album.id, productDescription: album.albumText, value: "1")
@@ -34,7 +34,7 @@ final class AlbumInfoViewModelTests: XCTestCase {
     func testCancelPayment() {
         let album = AlbumModel(id: "1", artistText: "", albumText: "albumText", image: nil, placeholderImage:"")
 
-        let viewModel = AlbumInfoViewModel(repository: AlbumRepositorySuccessImpl(), albumModel: album, wordPay: WorldPay.sharedInstance)
+        let viewModel = AlbumInfoViewModel(repository: AlbumRepositorySuccessImpl(), albumModel: album, paymentKit: PaymentKit.sharedInstance)
 
         let expectation = XCTestExpectation(description: "Fail payment")
 
@@ -65,7 +65,7 @@ final class AlbumInfoViewModelTests: XCTestCase {
     }
 
     override func tearDown() {
-        wordPay.clear()
+        paymentKit.clear()
         super.tearDown()
     }
 }

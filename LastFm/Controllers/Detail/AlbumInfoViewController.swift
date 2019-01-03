@@ -1,12 +1,12 @@
 import UIKit
 import RxSwift
 import ImageCache
-import WorldPayKit
+import PaymentKit
 
 final class AlbumInfoViewController: UIViewController {
-    static func controller(repository: AlbumRepository, wordPay: WorldPay = WorldPay.sharedInstance, album: AlbumModel) -> AlbumInfoViewController? {
+    static func controller(repository: AlbumRepository, paymentKit: PaymentKit = PaymentKit.sharedInstance, album: AlbumModel) -> AlbumInfoViewController? {
         let controller = UIStoryboard.instantiateViewController(className(), anyClass: self) as? AlbumInfoViewController
-        controller?.viewModel = AlbumInfoViewModel(repository: repository, albumModel: album, wordPay: wordPay)
+        controller?.viewModel = AlbumInfoViewModel(repository: repository, albumModel: album, paymentKit: paymentKit)
         return controller
     }
 

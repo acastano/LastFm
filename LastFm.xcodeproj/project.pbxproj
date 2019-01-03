@@ -81,6 +81,9 @@
 		412546BB21BD4F6300C775E1 /* AlbumRepositoryFakeImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412546B821BD4F6300C775E1 /* AlbumRepositoryFakeImpl.swift */; };
 		412546BC21BD4F6300C775E1 /* AlbumRepositorySuccessImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412546B921BD4F6300C775E1 /* AlbumRepositorySuccessImpl.swift */; };
 		412546BD21BD4F6300C775E1 /* AlbumRepositoryFailureImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412546BA21BD4F6300C775E1 /* AlbumRepositoryFailureImpl.swift */; };
+		4174378A21DE0C5000486C41 /* PaymentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4174378921DE0C5000486C41 /* PaymentKit.framework */; };
+		4174378B21DE0C8100486C41 /* PaymentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4174378921DE0C5000486C41 /* PaymentKit.framework */; };
+		4174378C21DE0C8100486C41 /* PaymentKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4174378921DE0C5000486C41 /* PaymentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4174EADA21C151C100A97836 /* AlbumSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174EAD921C151C100A97836 /* AlbumSearchViewModel.swift */; };
 		4174EADB21C1588F00A97836 /* AlbumSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174EAD921C151C100A97836 /* AlbumSearchViewModel.swift */; };
 		4174EADD21C1595000A97836 /* AlbumInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174EADC21C1595000A97836 /* AlbumInfoViewModel.swift */; };
@@ -115,6 +118,7 @@
 			files = (
 				4125465621BD21B400C775E1 /* RxSwift.framework in Embed Frameworks */,
 				4125465421BD21B400C775E1 /* RxCocoa.framework in Embed Frameworks */,
+				4174378C21DE0C8100486C41 /* PaymentKit.framework in Embed Frameworks */,
 				41EC2B6B21C2E9A90042A767 /* ImageCache.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -175,6 +179,7 @@
 		412546B821BD4F6300C775E1 /* AlbumRepositoryFakeImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryFakeImpl.swift; sourceTree = "<group>"; };
 		412546B921BD4F6300C775E1 /* AlbumRepositorySuccessImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumRepositorySuccessImpl.swift; sourceTree = "<group>"; };
 		412546BA21BD4F6300C775E1 /* AlbumRepositoryFailureImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryFailureImpl.swift; sourceTree = "<group>"; };
+		4174378921DE0C5000486C41 /* PaymentKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PaymentKit.framework; path = Carthage/Build/iOS/PaymentKit.framework; sourceTree = SOURCE_ROOT; };
 		4174EAD921C151C100A97836 /* AlbumSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSearchViewModel.swift; sourceTree = "<group>"; };
 		4174EADC21C1595000A97836 /* AlbumInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfoViewModel.swift; sourceTree = "<group>"; };
 		418083EF21C2E1EC000BAA47 /* AlbumInfoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInfoViewModelTests.swift; sourceTree = "<group>"; };
@@ -192,8 +197,10 @@
 				4125465521BD21B400C775E1 /* RxSwift.framework in Frameworks */,
 				41EC2B6721C2E98F0042A767 /* ImageCache.framework in Frameworks */,
 				4125465321BD21B400C775E1 /* RxCocoa.framework in Frameworks */,
+				4174378A21DE0C5000486C41 /* PaymentKit.framework in Frameworks */,
 				4125465021BD219300C775E1 /* RxCocoa.framework in Frameworks */,
 				4125464F21BD219300C775E1 /* RxSwift.framework in Frameworks */,
+				4174378B21DE0C8100486C41 /* PaymentKit.framework in Frameworks */,
 				41EC2B6A21C2E9A90042A767 /* ImageCache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,6 +590,7 @@
 		41EC2B6421C2E9180042A767 /* PaymentKit */ = {
 			isa = PBXGroup;
 			children = (
+				4174378921DE0C5000486C41 /* PaymentKit.framework */,
 			);
 			name = PaymentKit;
 			sourceTree = "<group>";
@@ -711,7 +719,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ImageCache.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/WorldPayKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PaymentKit.framework",
 			);
 			name = "Copy Frameworks";
 			outputFileListPaths = (
